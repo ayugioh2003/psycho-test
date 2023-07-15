@@ -1,0 +1,14 @@
+{
+  "name": "psycho-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:project1": "pnpm --filter @psycho-test/project1 start",
+    "start:project2": "pnpm --filter @psycho-test/project2 start",
+    "build:shared": "pnpm --filter @psycho-test/shared build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@psycho-test/shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    "import": "./index.js",
+    "require": "./dist/cjs/index.cjs"
+  },
+  "scripts": {
+    "build": "rollup --config ./rollup.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^3.25.1"
+  }
+}

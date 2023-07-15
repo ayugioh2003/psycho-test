@@ -1,0 +1,42 @@
+lockfileVersion: 5.3
+
+importers:
+
+  .:
+    specifiers: {}
+
+  packages/project1:
+    specifiers:
+      '@psycho-test/shared': workspace:*
+    dependencies:
+      '@psycho-test/shared': link:../shared
+
+  packages/project2:
+    specifiers:
+      '@psycho-test/shared': workspace:*
+    dependencies:
+      '@psycho-test/shared': link:../shared
+
+  packages/shared:
+    specifiers:
+      rollup: ^3.25.1
+    dependencies:
+      rollup: 3.25.1
+
+packages:
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /rollup/3.25.1:
+    resolution: {integrity: sha512-tywOR+rwIt5m2ZAWSe5AIJcTat8vGlnPFAv15ycCrw33t6iFsXZ6mzHVFh2psSjxQPmI+xgzMZZizUAukBI4aQ==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
