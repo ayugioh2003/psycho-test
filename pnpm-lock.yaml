@@ -88,6 +88,9 @@ importers:
       '@slidev/theme-seriph':
         specifier: latest
         version: 0.21.3
+      vue:
+        specifier: ^3.3.4
+        version: 3.3.4
 
 packages:
 
