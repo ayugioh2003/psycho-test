@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev:nuxt": "pnpm --filter @psycho-test/nuxt dev",
+    "build:nuxt": "pnpm --filter @psycho-test/nuxt build",
+    "preview:nuxt": "pnpm --filter @psycho-test/nuxt preview",
     "start:project1": "pnpm --filter @psycho-test/project1 start",
     "start:project2": "pnpm --filter @psycho-test/project2 start",
     "build:shared": "pnpm --filter @psycho-test/shared build"
