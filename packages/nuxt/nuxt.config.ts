@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     {
       route: '/api/express',
       middleware: true,
-      handler: '~/sub-system/express.ts',
+      handler: '~/sub-system/express',
     },
     {
       route: '/api/express-monorepo',

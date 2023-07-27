@@ -3,9 +3,18 @@
 </template>
 
 <script setup>
+import axios from 'axios'
+
 const jsPsychRef = ref({})
 
 onMounted(() => {
+  const tempId = String(new Date().valueOf())
+  let userId = localStorage.getItem('userId')
+  if (!userId) {
+    localStorage.setItem('userId', tempId)
+    userId = tempId
+  }
+
   /* initialize jsPsych */
   var jsPsych = initJsPsych({
     on_finish: function () {
@@ -13,7 +22,14 @@ onMounted(() => {
       jsPsych.data.displayData()
       // 之後可以在這裡送出資料給 server
       var all_data = jsPsych.data.get()
-      console.log(all_data.json())
+      console.log(JSON.parse(all_data.json()))
+      console.log('type of all_data.json()', typeof all_data.json())
+
+      axios.post('/api/express/experiment/participant-data', {
+        user_id: userId,
+        experiment: 'stroop',
+        data: JSON.parse(all_data.json()),
+      })
     },
   })
   jsPsychRef.value = jsPsych
@@ -44,8 +60,9 @@ onMounted(() => {
   /* define welcome message trial */
   var welcome = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus:
-      '歡迎來 <strike>當白老鼠</strike> 參與研究！請按任意鍵開始 <a href="/">回首頁</>',
+    stimulus: `歡迎 
+      <span>${userId}
+    來 <strike>當白老鼠</strike> 參與研究！請按任意鍵開始`,
     // stimulus: /*HTML*/ `<div class="img" style="background-color: red; background-image: url(${imageUrl.blue});"></div>`,
   }
   timeline.push(welcome)
@@ -371,6 +388,9 @@ onMounted(() => {
     },
   ]
 
+  // 方便打 API 測試。只剩兩個嘗試次
+  test_stimuli_color.splice(2)
+
   /* define fixation and test trials */
   var fixation = {
     type: jsPsychHtmlKeyboardResponse,
@@ -391,6 +411,7 @@ onMounted(() => {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['r', 'g', 'b'],
+    task: 'stroop',
     data: {
       task: 'response',
       correct_response: jsPsych.timelineVariable('correct_response'),
