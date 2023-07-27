@@ -382,14 +382,14 @@ onMounted(() => {
         color: 'blue',
         element: '',
         elementType: 'image',
-        consistency: 'neutral',
+        consistency: 'netural',
       },
       correct_response: 'g',
     },
   ]
 
-  // 方便打 API 測試。只剩兩個嘗試次
-  test_stimuli_color.splice(2)
+  // 方便打 API 測試。只留兩個嘗試次
+  // test_stimuli_color.splice(2)
 
   /* define fixation and test trials */
   var fixation = {

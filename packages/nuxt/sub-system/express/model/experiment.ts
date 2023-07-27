@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import dayjs from 'dayjs'
 
 /**
  * User Model
@@ -25,23 +26,10 @@ const ExperimentSchema = new mongoose.Schema(
       type: Object,
       required: [true, '實驗資料為必填'],
     },
-
-    // 建立時間，轉為 Timestamp 以方便前端好處理
-    createdAt: {
-      type: Number,
-    },
-    // 更新時間，轉為 Timestamp 以方便前端好處理
-    updatedAt: {
-      type: Number,
-    },
   },
   {
     versionKey: false,
-    timestamps: {
-      currentTime: () => Date.now(),
-    },
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    timestamps: true,
   }
 )
 
