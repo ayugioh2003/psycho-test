@@ -1,4 +1,6 @@
 import express from 'express'
+import { Parser } from '@json2csv/plainjs' // https://juanjodiaz.github.io/json2csv/#/quick-start
+
 import Experiment from '../model/experiment'
 
 const router = express.Router()
@@ -19,6 +21,7 @@ router.get('/participant-data', async (req, res) => {
 
 router.get('/stroop-data', async (req, res) => {
   const { query } = req
+
   const experiment = { experiment: 'stroop' }
   let dataList = (await Experiment.find({ ...experiment })) as any
 
@@ -100,21 +103,35 @@ router.get('/stroop-data', async (req, res) => {
       const averageRtByAllTrails = countInfo.rt / countInfo.count
 
       // 轉成陣列
-      const list = Object.values(data).map((obj: any) => {
-        const averageRtByLevel = obj.rt / obj.count
-        return {
-          id: obj.id,
-          userId: obj.userId,
-          consistency: obj.consistency,
-          elementType: obj.elementType,
-          rt: obj.count > 0 ? averageRtByLevel : averageRtByAllTrails,
-          totalRt: obj.rt,
-          count: obj.count,
-        }
-      })
+      const list = Object.values(data)
+        .map((obj: any) => {
+          const averageRtByLevel = obj.rt / obj.count
+          return {
+            id: obj.id,
+            userId: obj.userId,
+            consistency: obj.consistency,
+            elementType: obj.elementType,
+            rt: obj.count > 0 ? averageRtByLevel : averageRtByAllTrails,
+            totalRt: obj.rt,
+            count: obj.count,
+          }
+        })
+        .flat(5)
 
       return list
     })
+    .flat(5)
+
+  // 轉成 CSV 格式
+  if (query.format === 'csv') {
+    try {
+      const parser = new Parser()
+      const csv = parser.parse(dataList)
+      return res.json(csv)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   res.json(dataList)
 })

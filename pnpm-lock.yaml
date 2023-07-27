@@ -15,6 +15,9 @@ importers:
 
   packages/nuxt:
     dependencies:
+      '@json2csv/plainjs':
+        specifier: ^7.0.1
+        version: 7.0.1
       '@psycho-test/express':
         specifier: workspace:*
         version: link:../express
@@ -875,6 +878,18 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@json2csv/formatters@7.0.1:
+    resolution: {integrity: sha512-eCmYKIIoFDXUB0Fotet2RmcoFTtNLXLmSV7j6aEQH/D2GiO749Uan3ts03PtAhXpE11QghxBjS0toXom8VQNBw==}
+    dev: false
+
+  /@json2csv/plainjs@7.0.1:
+    resolution: {integrity: sha512-UAdaZwahrUeYhMYYilJwDsRfE7wDRsmGMsszYH67j8FLD5gZitqG38RXpUgHEH0s6YjsY8iKYWeEQ19WILncFA==}
+    dependencies:
+      '@json2csv/formatters': 7.0.1
+      '@streamparser/json': 0.0.15
+      lodash.get: 4.4.2
+    dev: false
+
   /@mapbox/node-pre-gyp@1.0.11:
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
     hasBin: true
@@ -1428,6 +1443,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@streamparser/json@0.0.15:
+    resolution: {integrity: sha512-6oikjkMTYAHGqKmcC9leE4+kY4Ch4eiTImXUN/N4d2bNGBYs0LJ/tfxmpvF5eExSU7iiPlV9jYlADqvj3NWA3Q==}
+    dev: false
 
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -4081,6 +4100,10 @@ packages:
   /lodash.flatten@4.4.0:
     resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
     dev: true
+
+  /lodash.get@4.4.2:
+    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    dev: false
 
   /lodash.isarguments@3.1.0:
     resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
