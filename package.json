@@ -10,11 +10,15 @@
     "build:slidev": "pnpm --filter @psycho-test/slidev build",
     "dev:slidev": "pnpm --filter @psycho-test/slidev dev",
     "export:slidev": "pnpm --filter @psycho-test/slidev export",
+    "deploy:slidev": "pnpm build:slidev && gh-pages -d dist",
     "start:project1": "pnpm --filter @psycho-test/project1 start",
     "start:project2": "pnpm --filter @psycho-test/project2 start",
     "build:shared": "pnpm --filter @psycho-test/shared build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
