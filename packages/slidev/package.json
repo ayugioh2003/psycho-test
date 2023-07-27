@@ -2,7 +2,8 @@
   "name": "@psycho-test/slidev",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "buildin": "slidev build",
+    "build": "slidev build --out ../../dist",
     "dev": "slidev --open",
     "export": "slidev export"
   },
