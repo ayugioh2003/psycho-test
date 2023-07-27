@@ -127,7 +127,7 @@ router.get('/stroop-data', async (req, res) => {
     try {
       const parser = new Parser()
       const csv = parser.parse(dataList)
-      return res.json(csv)
+      return res.send(csv)
     } catch (err) {
       console.error(err)
     }
