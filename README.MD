@@ -24,3 +24,7 @@ pnpm add -w -D typescript // devDependency
 pnpm add --filter "@psycho-test/{package}" typescript // Dependency
 pnpm add --filter "@psycho-test/{package}" -D typescript // DevDependency
 ```
+
+## SLIDEV
+
+- https://ayugioh2003.github.io/psycho-test

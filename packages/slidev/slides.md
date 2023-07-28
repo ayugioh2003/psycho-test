@@ -12,12 +12,12 @@ info: |
 drawings:
   persist: false
 transition: slide-left
-title: Welcome to Slidev
+title: 當心理學研究遇到前端
 ---
 
-# Welcome to Slidev
+# 當心理學研究遇到前端
 
-Presentation slides for developers
+心理學 x 前端，在網頁上做心理學實驗
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -43,22 +43,23 @@ The last comment block of each slide will be treated as slide notes. It will be 
 transition: fade-out
 ---
 
-# What is Slidev?
+# 專案緣起
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+以前唸心理系，一些課堂會要求做心理學實驗
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
+- 🧑‍💻 要走出門去做實驗，受試者覺得很麻煩
+- 📝 短時間要收集大量數據，研究者覺得很麻煩
+- 🤹 下雨天刮颱風要出門，大家都覺得很麻煩
+- 🛠 用圖形化介面軟體製作實驗，手指好痠，過了一個月後根本不記得怎麼拉出來的
 
-<br>
-<br>
+<hr class="my-4"/>
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+
+今日介紹
+
+- 心理學實驗：以 Stroop Effect 為例與 Demo
+- 專案架構：程式面分享
+
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -85,349 +86,158 @@ Here is another comment.
 layout: default
 ---
 
-# Table of contents
+# 目錄
 
-```
 <Toc minDepth="1" maxDepth="5"></Toc>
-```
 
-<Toc></Toc>
-
----
-transition: slide-up
-
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
 
 ---
 layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+image: /stroop-wiki.png
 ---
 
-# Code
+# Stroop effect 叫色測驗
 
-Use code snippets and get the highlighting directly![^1]
+人在認知行為 A 的反應時間，會受其他認知行為 BCD 影響，而變快或變慢
 
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
+- Stroop effect: 唸出顏色的反應時間，會受到文字的字義影響 [^1][^2]
 
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
-}
-```
+<div class="pb-16"></div>
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+[^1]: [Stroop 中文維基](https://zh.wikipedia.org/zh-tw/%E6%96%AF%E7%89%B9%E9%B2%81%E6%99%AE%E6%95%88%E5%BA%94)
+[^2]: [佛光大學心理系 叫色實驗](http://www.fgu.edu.tw/~psychology/know/data/exp/09.htm)
 
 ---
 
-# Components
+# 實驗設計與流程
 
-<div grid="~ cols-2 gap-4">
-<div>
+- 3x3 受試者內設計
+- 獨變項：
+  - 一致性 (3): 一致、不一致、中性 - 實際顏色與素材意涵顏色的一致性
+  - 素材類型 (3): 中文、英文、圖片
+- 依變項
+  - 反應時間: 素材出現到按下按鍵的時間
+- 假設
+  - 一致性為一致時，反應時間較快；不一致時，反應時間較慢
+  - 素材類型為圖片時，一致性對反應時間的影響較低
 
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
+<div class="mb-8"></div>
 
 ```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
+graph LR
+B[收集受試者] --> C[指導語] --> D[練習] --> E[正式測驗] -->F[收集數據] --> G[整理數據] --> H[分析數據]
 ```
 
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectivness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
+---
 
-```plantuml {scale: 0.7}
+# Demo 時間
+
+- 實驗網址: https://psycho-test-nuxt.vercel.app/
+- colab: https://colab.research.google.com/drive/19H1IUJ2vCoarNAGTc1w35xvV1odn3hWO 
+
+---
+
+# 專案架構
+
+- 前端、後端、資料庫、Colab
+
+<div class="mt-[-80px]">
+
+
+```plantuml {scale: .7}
 @startuml
 
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
+node "Nuxt Frontend/Backend" {
+  [Vue3]
+  [jsPsych]
+  [Nuxt Server Middleware]
+  [Axios]   
 
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
+  [jsPsych] --> [Axios]
 }
 
 
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
+package "Backend" {
+  [API]
+  [Express]
+  [Router]
+  [Mongoose]
+
+  [Express] --> [API] 
+  [API] --> [Router]
+  [Router] --> [Mongoose]
+}
+
+
+
+cloud "Colab" {
+  [Python]
+}
+
+
+database "MongoDb" {
+  folder "Collections" {
+    [Experiment] 
   }
-  frame "Foo" {
-    [Frame 4]
-  }
 }
 
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
+[Nuxt Server Middleware] -> [Express]
+[Mongoose] -> [Experiment]
+[Python] --> [API]
+[Axios] --> [API]
 
 @enduml
 ```
 
 </div>
 
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+---
+
+# jsPsych
+
+jsPsych is a JavaScript framework for creating behavioral experiments that run in a web browser.[^1]
+
+- 符合實驗流程的程式碼設計
+- 許多 plugins (雖然我沒用過)
+
+[^1]: [jsPsych 官方網站](https://www.jspsych.org/7.3/)
+
+```ts
+const jsPsych = initJsPsych()
+const timeline = []
+
+const instructions = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: 'welcome!',
+ }
+timeline.push(instructions)
+
+const hello_trial = { ... }
+timeline.push(hello_trial)
+
+const test_procedure = { ... }
+timeline.push(test_procedure)
+
+jsPsych.run(timeline)
+```
 
 ---
-src: ./pages/multiple-entries.md
-hide: false
----
+
+# 未來展望
+
+- 前端/實驗軟體部分
+  - 多比較各種線上心理學實驗的方案 (lab.js, e-prime, psychoPy ...)
+- 後端部分
+  - 在後端處理資料還是有點手工，再找看看有沒有現成方案
+  - 感覺後端就單純收資料，處理資料的工作可以交給 Python
+- 統計部分
+  - 看看有沒有少做事情。例如常態性檢定、同質性檢定
+  - 本來有想說整合 PyScript，將統計結果放到網站上，但太多 error 就放棄了
+
 
 ---
 layout: center
 class: text-center
 ---
 
-# Learn More
-
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+# 沒惹
