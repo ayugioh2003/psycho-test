@@ -243,7 +243,7 @@ jsPsych.run(timeline)
   - 看看有沒有少做事情。例如常態性檢定、同質性檢定
   - 本來有想說整合 PyScript，將統計結果放到網站上，但太多 error 就放棄了
 
-[^1]: 
+[^1]: [Nuxt3 programmatic usage](https://nuxt.com/docs/api/advanced/kit#programmatic-usage)
 ---
 
 # Q & A
