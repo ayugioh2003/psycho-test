@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "buildin": "slidev build",
-    "build": "slidev build --base /psycho-test --out ../../dist",
+    "build": "slidev build --base /psycho-test/ --out ../../dist",
     "dev": "slidev --open",
     "export": "slidev export"
   },
