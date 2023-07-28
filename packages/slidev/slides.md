@@ -132,8 +132,12 @@ B[收集受試者] --> C[指導語] --> D[練習] --> E[正式測驗] -->F[收�
 
 # Demo 時間
 
-- 實驗網址: https://psycho-test-nuxt.vercel.app/
-- colab: https://colab.research.google.com/drive/19H1IUJ2vCoarNAGTc1w35xvV1odn3hWO 
+- 實驗網址: <https://psycho-test-nuxt.vercel.app/>
+  - 收集的資料: <https://psycho-test-nuxt.vercel.app/api/express/experiment/participant-data?experiment=stroop>
+  - 整理的資料: <https://psycho-test-nuxt.vercel.app/api/express/experiment/stroop-data?format=csv>
+- colab: <https://colab.research.google.com/drive/19H1IUJ2vCoarNAGTc1w35xvV1odn3hWO>
+- 投影片: <https://ayugioh2003.github.io/psycho-test/>
+- 專案程式碼: <https://github.com/ayugioh2003/psycho-test>
 
 ---
 
@@ -223,16 +227,28 @@ jsPsych.run(timeline)
 
 ---
 
-# 未來展望
+# 小結與未來展望
 
-- 前端/實驗軟體部分
+- 前端/實驗軟體/平台部分
+  - 因為 jsPsych 有用到 DOM，在 SSR 跟換頁時會有點問題
+  - 鍵 RGB 其實不好反應（都靠左手方向），最好換成三個分開帶有顏色的按鈕
   - 多比較各種線上心理學實驗的方案 (lab.js, e-prime, psychoPy ...)
 - 後端部分
-  - 在後端處理資料還是有點手工，再找看看有沒有現成方案
+  - Nuxt3 還是可以搭配 Express 使用，[但找不到用 Express 呼叫 Nuxt3 的正確打開方式] [^1]
+  - [在後端處理資料還是有點手工](https://github.com/ayugioh2003/psycho-test/blob/main/packages/nuxt/sub-system/express/router/experiment.ts#L22)，再找看看有沒有現成方案
   - 感覺後端就單純收資料，處理資料的工作可以交給 Python
 - 統計部分
   - 看看有沒有少做事情。例如常態性檢定、同質性檢定
   - 本來有想說整合 PyScript，將統計結果放到網站上，但太多 error 就放棄了
+
+[^1]: 
+---
+
+# Q & A
+
+<div class="flex justify-center mt-12">
+<img src="https://dvblobcdnjp.azureedge.net/Content/Upload/Popular/Images/2021-11/10c680ac-6588-48d6-ab82-127dc3cb2973_m.jpg" class=" w-[500px]">
+</div>
 
 
 ---
@@ -241,3 +257,5 @@ class: text-center
 ---
 
 # 沒惹
+
+感謝聆聽
