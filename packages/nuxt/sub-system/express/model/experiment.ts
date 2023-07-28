@@ -21,6 +21,16 @@ const ExperimentSchema = new mongoose.Schema(
       required: [true, '實驗名稱為必填'],
     },
 
+    // 正確率
+    accuracy: {
+      type: Number,
+    },
+
+    // 平均反應時間
+    average_rt: {
+      type: Number,
+    },
+
     // 資料
     data: {
       type: Object,

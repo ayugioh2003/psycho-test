@@ -10,6 +10,11 @@ const jsPsychRef = ref({})
 onMounted(() => {
   const tempId = String(new Date().valueOf())
   let userId = localStorage.getItem('userId')
+  let experimentInfo = {
+    rt: 0,
+    accuracy: 0,
+  }
+
   if (!userId) {
     localStorage.setItem('userId', tempId)
     userId = tempId
@@ -28,6 +33,8 @@ onMounted(() => {
       axios.post('/api/express/experiment/participant-data', {
         user_id: userId,
         experiment: 'stroop',
+        accuracy: experimentInfo.accuracy,
+        average_rt: experimentInfo.rt,
         data: JSON.parse(all_data.json()),
       })
     },
@@ -449,6 +456,9 @@ onMounted(() => {
       var correct_trials = trials.filter({ correct: true })
       var accuracy = Math.round((correct_trials.count() / trials.count()) * 100)
       var rt = Math.round(correct_trials.select('rt').mean())
+
+      experimentInfo.accuracy = accuracy
+      experimentInfo.rt = rt
 
       return `<p>You responded correctly on ${accuracy}% of the trials.</p>
           <p>Your average response time was ${rt}ms.</p>
