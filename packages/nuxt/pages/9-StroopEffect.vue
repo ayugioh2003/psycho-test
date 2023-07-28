@@ -371,7 +371,7 @@ onMounted(() => {
         elementType: 'image',
         consistency: 'congruent',
       },
-      correct_response: 'g',
+      correct_response: 'b',
     },
     {
       stimulus: /*html*/ `<div class="img bg-blue" style="background-image: url(${imageUrl.green});"></div>`,
@@ -381,7 +381,7 @@ onMounted(() => {
         elementType: 'image',
         consistency: 'incongruent',
       },
-      correct_response: 'g',
+      correct_response: 'b',
     },
     {
       stimulus: /*html*/ `<div class="img bg-blue" style="background-image: url();"></div>`,
@@ -391,7 +391,7 @@ onMounted(() => {
         elementType: 'image',
         consistency: 'netural',
       },
-      correct_response: 'g',
+      correct_response: 'b',
     },
   ]
 
